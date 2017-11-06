@@ -1,0 +1,40 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>延迟调用</title>
+</head>
+<body>
+<button id="btn">按钮</button>
+<button id="end">停止</button>
+<div id="show"></div>
+<script>
+    var btn = document.getElementById('btn');
+    var show = document.getElementById('show');
+    /*btn.onclick = function(){
+        setTimeout(function(){
+            // 获取当前的时间
+            var d = new Date();
+            show.innerHTML = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        },2000);
+    }*/
+    // 可以不可以使用 setTimeout()方法实现与setInterval()方法一样效果的逻辑
+    btn.onclick = showTime;
+    var t;
+    function showTime(){
+        // 获取当前的时间
+        var d = new Date();
+        show.innerHTML = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        // 开始设定定时器
+        t = setTimeout(showTime,1000);
+    }
+
+    var end = document.getElementById('end');
+    end.onclick = function(){
+        clearTimeout(t);
+    }
+</script>
+</body>
+</html>
+```
